@@ -7,6 +7,7 @@ public class SandLab
   //add constants for particle types here
   public static final int EMPTY = 0;
   public static final int METAL = 1;
+  public static final int SAND = 2;
   
   //do not add any more fields below
   private int[][] grid;
@@ -23,21 +24,24 @@ public class SandLab
     String[] names;
     // Change this value to add more buttons
     //Step 4,6
-    names = new String[2];
+    names = new String[3];
     // Each value needs a name for the button
     names[EMPTY] = "Empty";
     names[METAL] = "Metal";
+    names[SAND] = "Sand";
     
     //1. Add code to initialize the data member grid with same dimensions
-    this.grid = new int[0][1];
+    
     
     display = new SandDisplay("Falling Sand", numRows, numCols, names);
+    grid = new int[numRows][numCols];
   }
   
   //called when the user clicks on a location using the given tool
   private void locationClicked(int row, int col, int tool)
   {
     //2. Assign the values associated with the parameters to the grid
+	  grid[row][col] = tool;
    
   }
 
@@ -46,6 +50,26 @@ public class SandLab
   {
       //Step 3
    //Hint - use a nested for loop
+	  
+	  for(int row = 0; row < grid.length; row++)
+	  {
+		  for(int col = 0; col < grid[0].length; col++)
+		  {
+			  if(grid[row][col] == EMPTY)
+			  {
+				  display.setColor(row, col, Color.BLACK);
+			  }
+			  else if(grid[row][col] == METAL)
+			  {
+				  display.setColor(row, col, Color.GRAY);
+			  }
+			  else if(grid[row][col] == SAND)
+			  {
+				  display.setColor(row,  col,  Color.YELLOW);
+			  }
+				  
+		  }
+	  }
     
   }
 
